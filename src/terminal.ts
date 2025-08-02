@@ -32,14 +32,14 @@ function resolveLibPath(): string {
 			? "librust_pty_arm64.so"
 			: "librust_pty.so";
 
-	// Start from the current module's location (inside node_modules/bun-pty/dist)
+	// Start from the current module's location (inside node_modules/@skitee3000/bun-pty/dist)
 	const base = Bun.fileURLToPath(import.meta.url);
-	const here = base.replace(/\/dist\/.*$/, ""); // up to bun-pty/
+	const here = base.replace(/[\/\\]dist[\/\\].*$/, ""); // up to @skitee3000/bun-pty/
 
 	const fallbackPaths = [
-		join(here, "rust-pty", "target", "release", filename),       // node_modules/bun-pty/rust-pty/target/release
-		join(here, "..", "bun-pty", "rust-pty", "target", "release", filename), // monorepo setups
-		join(process.cwd(), "node_modules", "bun-pty", "rust-pty", "target", "release", filename),
+		join(here, "rust-pty", "target", "release", filename),       // node_modules/@skitee3000/bun-pty/rust-pty/target/release
+		join(here, "..", "@skitee3000/bun-pty", "rust-pty", "target", "release", filename), // monorepo setups
+		join(process.cwd(), "node_modules", "@skitee3000/bun-pty", "rust-pty", "target", "release", filename),
 	];
 
 	for (const path of fallbackPaths) {
